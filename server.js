@@ -20,12 +20,12 @@ mongoose.connection
 
 // Models
 const ProductsSchema = new mongoose.Schema({
-    name: {type:String, required:true},
-    manufacturer: {type:String, required:true},
-    image: {type:String, required:true},
-    desc: {type:String, required:true},
-    price: {type:String, required:true},
-    category: {type:String, required:true},
+    name: String,
+    manufacturer: String,
+    image: String,
+    desc: String,
+    price: String,
+    category: String,
 })
 
 const Products = mongoose.model('Products', ProductsSchema)
