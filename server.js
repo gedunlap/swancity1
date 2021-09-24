@@ -48,7 +48,7 @@ app.get('/product', async (req, res) => {
     }
 })
 // Product Create
-app.post('/product', async (req, res) => {
+app.post('/createform', async (req, res) => {
     try {
         res.json(await Products.create(req.body))
     } catch (error) {
