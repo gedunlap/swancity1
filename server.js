@@ -19,22 +19,16 @@ mongoose.connection
     .on('error', (error) => console.log(error))
 
 // Models
-const ProductSchema = new mongoose.Schema({
+const ProductsSchema = new mongoose.Schema({
     name: {type:String, required:true},
     manufacturer: {type:String, required:true},
     image: {type:String, required:true},
     desc: {type:String, required:true},
-    price: {type:Number, get:getPrice, set:setPrice},
+    price: {type:String, required:true},
     category: {type:String, required:true},
 })
-function getPrice(num){
-    return (num/100).toFixed(2);
-}
-function setPrice(num){
-    return num*100;
-}
 
-const Product = mongoose.model('Product', ProductSchema)
+const Products = mongoose.model('Products', ProductsSchema)
 
 // Middleware
 app.use(cors())
@@ -48,7 +42,7 @@ app.get('/', (req, res) => {
 // Product Index
 app.get('/product', async (req, res) => {
     try {
-        res.json(await Product.find({}))
+        res.json(await Products.find({}))
     } catch (error) {
         res.status(400).json(error)
     }
@@ -56,7 +50,7 @@ app.get('/product', async (req, res) => {
 // Product Create
 app.post('/product', async (req, res) => {
     try {
-        res.json(await Product.create(req.body))
+        res.json(await Products.create(req.body))
     } catch (error) {
         res.status(400).json(error)
     }
@@ -65,7 +59,7 @@ app.post('/product', async (req, res) => {
 app.put('/product/:id', async (req, res) => {
     try{
         res.json(
-            await Product.findByIdAndUpdate(req.params.id, req.body, {new:true})
+            await Products.findByIdAndUpdate(req.params.id, req.body, {new:true})
         )
     } catch (error) {
         res.status(400).json(error)
@@ -75,7 +69,7 @@ app.put('/product/:id', async (req, res) => {
 app.delete('/product/:id', async (req, res) => {
     try {
         res.json(
-            await Product.findByIdAndRemove(req.params.id)
+            await Products.findByIdAndRemove(req.params.id)
         )
     } catch (error) {
         res.status(400).json(error)
