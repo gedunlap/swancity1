@@ -56,7 +56,7 @@ app.post('/createform', async (req, res) => {
     }
 })
 // Product Update
-app.put('/product/:id', async (req, res) => {
+app.put('/products/:id', async (req, res) => {
     try{
         res.json(
             await Products.findByIdAndUpdate(req.params.id, req.body, {new:true})
@@ -66,7 +66,7 @@ app.put('/product/:id', async (req, res) => {
     }
 })
 // Product Delete
-app.delete('/product/:id', async (req, res) => {
+app.delete('/products/:id', async (req, res) => {
     try {
         res.json(
             await Products.findByIdAndRemove(req.params.id)
